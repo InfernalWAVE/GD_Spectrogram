@@ -10,7 +10,7 @@ It generates images for all of these, and saves all of the data and images to a 
 NOTE: 
 it generates the capture on exit_tree right now, so that means you have to close the app with the X on the window for it to work. Pressing the stop debugging button doesnt trigger the signal. You can bind this to anything, I was just lazy for prototyping. It starts capture as soon as you press play.
 
-also, the mel-scale and MFCCs implementstions may not be perfect. i didnt do any actual validation, just worked off of how librosa does things.
+also, the mel-scale and MFCCs implementations may not be perfect. i didnt do any actual validation, just worked off of how librosa does things.
 
 
 This software is released under the MIT Licenses, see LICENSE for more information.
