@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dfp2sui105of8"]
+
+[node name="ProgressBar" type="ProgressBar"]
+auto_translate_mode = 1
+offset_right = 296.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 15

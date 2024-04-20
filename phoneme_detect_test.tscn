@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbc3v6awap3rk"]
+
+[ext_resource type="Script" path="res://phoneme_detect_test.gd" id="1_dcmin"]
+[ext_resource type="PackedScene" path="res://audio_level_bar.tscn" id="2_ifqva"]
+[ext_resource type="Gradient" path="res://heatmap.tres" id="3_125jd"]
+[ext_resource type="Gradient" path="res://mfcc_heatmap.tres" id="4_vamn0"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_k2h00"]
+
+[node name="PhonemeDetect" type="PanelContainer"]
+anchors_preset = -1
+anchor_left = 0.059
+anchor_top = 0.051
+anchor_right = 0.948
+anchor_bottom = 0.948
+offset_left = 0.279995
+offset_top = -0.0800018
+offset_right = 0.159912
+offset_bottom = -871.84
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Voice FFT"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("levels_container")]
+stream = SubResource("AudioStreamMicrophone_k2h00")
+autoplay = true
+bus = &"Record"
+script = ExtResource("1_dcmin")
+audio_level_bar_scene = ExtResource("2_ifqva")
+levels_container = NodePath("../VBoxContainer")
+heatmap = ExtResource("3_125jd")
+mfcc_heatmap = ExtResource("4_vamn0")
+spectrogram_resource_name = "spectrogram_capture_1"
+spectrogram_capture_dir = "res://captures/"
