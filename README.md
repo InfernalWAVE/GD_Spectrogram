@@ -5,7 +5,7 @@ It also find the mel-scale spectrogram, and MFCCs.
 ![spectrogram_capture_1_mel](https://github.com/InfernalWAVE/GD_Spectrogram/assets/48569884/34e787b8-f0d8-457c-87f2-3b7f5c2220e3)
 ![spectrogram_capture_1_mfcc](https://github.com/InfernalWAVE/GD_Spectrogram/assets/48569884/5163d401-e736-4b4b-85f3-3e0f41cebb4a)
 
-It generates images for all of thes, and saves all of the data and images to a SpectrogramResource in the res://captures/ directory.
+It generates images for all of these, and saves all of the data and images to a SpectrogramResource in the res://captures/ directory.
 
 NOTE: it generates the capture on exit_tree right now, so that means you have to close the app with the X on the window for it to work. Pressing the stop debugging button doesnt trigger the signal. You can bind this to anything, I was just lazy for prototyping. It starts capture as soon as you press play.
 
