@@ -8,6 +8,7 @@ resource_name = "Record"
 
 [sub_resource type="AudioEffectSpectrumAnalyzer" id="AudioEffectSpectrumAnalyzer_hikcl"]
 resource_name = "SpectrumAnalyzer"
+buffer_length = 4.0
 
 [resource]
 bus/1/name = &"Record"

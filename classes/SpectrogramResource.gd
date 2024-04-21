@@ -15,3 +15,4 @@ extends Resource
 @export var mel_image: Image
 @export var mfccs: Array
 @export var mfcc_image: Image
+@export var formants: Array[Array]
