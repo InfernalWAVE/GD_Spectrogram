@@ -1,11 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://cbc3v6awap3rk"]
 
-[ext_resource type="AudioStream" uid="uid://cfm1net7voei7" path="res://test_audio/sorohanro_-_solo-trumpet-06.hq.ogg" id="1_j4aqk"]
 [ext_resource type="Script" path="res://realtime_spectrogram.gd" id="2_d57jj"]
 [ext_resource type="PackedScene" path="res://audio_level_bar.tscn" id="2_ifqva"]
 [ext_resource type="Gradient" path="res://heatmap.tres" id="3_125jd"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_y0xxr"]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_l2fau"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -46,7 +47,7 @@ text = "Voice FFT"
 horizontal_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PhonemeDetect" node_paths=PackedStringArray("texture_rect", "levels_container")]
-stream = ExtResource("1_j4aqk")
+stream = SubResource("AudioStreamMicrophone_l2fau")
 autoplay = true
 bus = &"Record"
 script = ExtResource("2_d57jj")
