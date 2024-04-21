@@ -1,3 +1,5 @@
+NOTE:
+
 This is a dirty implementation of a spectrogram in Godot!
 ![spectrogram_capture_1](https://github.com/InfernalWAVE/GD_Spectrogram/assets/48569884/11e2e1cb-259a-41a7-87f9-a45b5e157df3)
 
