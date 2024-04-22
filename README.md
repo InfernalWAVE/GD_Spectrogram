@@ -11,12 +11,15 @@ The demo also includes a script for showing a spectrogram in realtime over a sho
 Both demos identify the first 4 formants in the analyzed audio. The formants are drawn in green on the spectrogram image. The realtime demo uses a faster/less-accurate dynamic compression method for this purpose.
 
 The spectrogram images look like:
+
 ![spectrogram_capture_1](https://github.com/InfernalWAVE/GD_Spectrogram/assets/48569884/8ac480c7-73f1-4418-a8f4-5225a5bd5e9c)
 
 The mel-scale spectrogram images look like:
+
 ![spectrogram_capture_1_mel](https://github.com/InfernalWAVE/GD_Spectrogram/assets/48569884/e93b1b45-72b3-42bc-9429-b282f483ffb1)
 
-The MFCC images look like
+The MFCC images look like:
+
 ![spectrogram_capture_1_mfcc](https://github.com/InfernalWAVE/GD_Spectrogram/assets/48569884/cb7315f7-cad4-4bc8-9865-74b5996a422e)
 
 
