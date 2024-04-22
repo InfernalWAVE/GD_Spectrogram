@@ -10,7 +10,7 @@ The demo also includes a script for showing a spectrogram in realtime over a sho
 
 Both demos identify the first 4 formants in the analyzed audio. The formants are drawn in green on the spectrogram image. The realtime demo uses a faster/less-accurate dynamic compression method for this purpose.
 
-Both demos give a realtime visualization of the bucket levels using progress bars.
+Both demos give a realtime visualization of the bucket levels using progress bars, and labels for the formant frequencies.
 
 The spectrogram images look like:
  
