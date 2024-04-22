@@ -22,7 +22,7 @@ extends AudioStreamPlayer
 @export var spectrogram_resource_name: String = "spectrogram_capture_1"
 @export var spectrogram_capture_dir: String = "res://captures/"
 
-@onready var spectrum: AudioEffectSpectrumAnalyzerInstance = AudioServer.get_bus_effect_instance(1,2)
+@onready var spectrum: AudioEffectSpectrumAnalyzerInstance = AudioServer.get_bus_effect_instance(1,1)
 
 @onready var formant_labels: Array[Label] = [F1_label, F2_label, F3_label, F4_label]
 
@@ -72,17 +72,6 @@ func spectrum_analyze_audio() -> void:
 	
 	powers.append(current_powers)
 	energies.append(current_energies)
-	
-	if realtime_calc:
-		var dynamic_threshold_value = dynamic_threshold(energies)
-		var frame_formants = get_formants_for_frame(current_energies, dynamic_threshold_value)
-		formants.append(frame_formants)
-		
-		var mel_energy_frame: Array = apply_mel_filters_to_frame(current_energies)
-		mel_energies.append(mel_energy_frame)
-
-		var mfcc_frame: Array = calculate_mfccs_from_frame(mel_energy_frame)
-		mfccs.append(mfcc_frame)
 
 func refresh_levels_ui() -> void:
 	for i in range(NUM_BUCKETS):
@@ -91,8 +80,7 @@ func refresh_levels_ui() -> void:
 	if not formants.is_empty():
 		for i in range(min(4, formants[-1].size())):
 			formant_labels[i].text = str(formants[-1][i])
-		
-
+	
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		capture_spectrogram_resource()
@@ -105,21 +93,18 @@ func capture_spectrogram_resource() -> void:
 	spectrogram_resource.energies = energies
 	spectrogram_resource.powers = powers
 	
-	if not realtime_calc:
-		extract_formants() # not needed if realtime calc
+	extract_formants()
 	spectrogram_resource.formants = formants
 	
 	spectrogram_resource.image = create_spectrogram_image_w_formants(energies)
 	spectrogram_resource.image.save_png(spectrogram_capture_dir + spectrogram_resource_name + ".png")
 	
-	if not realtime_calc:
-		apply_mel_filters_to_energies() # not needed if realtime calc
+	apply_mel_filters_to_energies()
 	spectrogram_resource.mel_energies = mel_energies
 	spectrogram_resource.mel_image = create_spectrogram_image(mel_energies)
 	spectrogram_resource.mel_image.save_png(spectrogram_capture_dir + spectrogram_resource_name + "_mel.png")
 	
-	if not realtime_calc:
-		calculate_mfccs_from_mel_energies() # not needed if realtime calc
+	calculate_mfccs_from_mel_energies()
 	spectrogram_resource.mfccs = mfccs
 	spectrogram_resource.mfcc_image = create_mfcc_image(mfccs)
 	spectrogram_resource.mfcc_image.save_png(spectrogram_capture_dir + spectrogram_resource_name + "_mfcc.png")
@@ -327,17 +312,3 @@ func extract_formants() -> void:
 	formants.clear()
 	for frame in energies:
 		formants.append(get_formants_for_frame(frame, dynamic_threshold_value))
-
-func apply_mel_filters_to_frame(frame: Array) -> Array:
-	var mel_energy_frame: Array = []
-	for mel_filter in mel_filter_banks:
-		var mel_energy: float = 0.0
-		for i in range(mel_filter.size()):
-			mel_energy += frame[i] * mel_filter[i]
-		mel_energy_frame.append(mel_energy)
-	return mel_energy_frame
-
-func calculate_mfccs_from_frame(mel_energy_frame: Array) -> Array:
-	var log_mel_energies = mel_energy_frame.map(func(energy): return log(max(energy, EPSILON)))
-	var cepstral_coeffs = dct_ii(log_mel_energies)
-	return cepstral_coeffs

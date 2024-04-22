@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbc3v6awap3rk"]
+
+[ext_resource type="AudioStream" uid="uid://cfm1net7voei7" path="res://test_audio/sorohanro_-_solo-trumpet-06.hq.ogg" id="1_bohcm"]
+[ext_resource type="Script" path="res://realtime_spectrogram.gd" id="2_o55fk"]
+[ext_resource type="PackedScene" path="res://audio_level_bar.tscn" id="3_wrkhh"]
+[ext_resource type="Gradient" path="res://heatmap.tres" id="4_v4n7q"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_y0xxr"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.01
+offset_bottom = 161.584
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 60.6965
+offset_top = 8.16078
+offset_right = 970.919
+offset_bottom = 63.1608
+texture = SubResource("ImageTexture_y0xxr")
+
+[node name="PhonemeDetect" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.059
+anchor_top = 0.051
+anchor_right = 0.948
+anchor_bottom = 0.948
+offset_left = 0.279995
+offset_top = 121.759
+offset_right = 0.159912
+offset_bottom = 31.8183
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhonemeDetect"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PhonemeDetect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Voice FFT"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PhonemeDetect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="Label" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "F1 [Hz]"
+
+[node name="Label2" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "F2 [Hz]"
+
+[node name="Label4" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label5" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "F3 [Hz]"
+
+[node name="Label6" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label7" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "F4 [Hz]"
+
+[node name="Label8" type="Label" parent="PhonemeDetect/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PhonemeDetect" node_paths=PackedStringArray("texture_rect", "levels_container", "F1_label", "F2_label", "F3_label", "F4_label")]
+stream = ExtResource("1_bohcm")
+autoplay = true
+bus = &"Record"
+script = ExtResource("2_o55fk")
+texture_rect = NodePath("../../TextureRect")
+audio_level_bar_scene = ExtResource("3_wrkhh")
+levels_container = NodePath("../VBoxContainer")
+heatmap = ExtResource("4_v4n7q")
+F1_label = NodePath("../VBoxContainer/GridContainer/Label2")
+F2_label = NodePath("../VBoxContainer/GridContainer/Label4")
+F3_label = NodePath("../VBoxContainer/GridContainer/Label6")
+F4_label = NodePath("../VBoxContainer/GridContainer/Label8")

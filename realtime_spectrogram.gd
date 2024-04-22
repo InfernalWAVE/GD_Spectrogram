@@ -12,10 +12,17 @@ extends AudioStreamPlayer
 @export var levels_container: VBoxContainer
 @export var heatmap: Gradient
 
+@export var F1_label: Label
+@export var F2_label: Label
+@export var F3_label: Label
+@export var F4_label: Label
+
 @export var spectrogram_resource_name: String = "spectrogram_capture_1"
 @export var spectrogram_capture_dir: String = "res://captures/"
 
 @onready var spectrum: AudioEffectSpectrumAnalyzerInstance = AudioServer.get_bus_effect_instance(1,1)
+
+@onready var formant_labels: Array[Label] = [F1_label, F2_label, F3_label, F4_label]
 
 var powers: Array[Array]
 var energies: Array[Array]
@@ -102,6 +109,9 @@ func refresh_levels_ui() -> void:
 	for i in range(NUM_BUCKETS):
 		levels[i].set_value(energies[time_index%NUM_FRAMES][i] * LEVELS_SCALE)
 	
+	for i in range(NUM_FORMANTS):
+		formant_labels[i].set_text(str(formants[time_index%NUM_FRAMES][i]))
+	
 	update_spectrogram_image()
 
 func update_spectrogram_image():
@@ -177,12 +187,16 @@ func get_formants_for_frame(frame: Array, dynamic_threshold: float) -> Array[flo
 	var frame_peaks: Array[Dictionary] = find_peaks_in_frame(frame, min_peak_height)
 	frame_peaks.sort_custom(_compare_peaks)  # Use the custom comparator to sort peaks by amplitude
 
-	var frame_formants: Array[float] = []
-	var formant_count: int = 4
-	for i in range(min(formant_count, frame_peaks.size())):
-		frame_formants.append(frame_peaks[i]["frequency"])
+	var frame_formants: Array[float]
+	frame_formants.resize(NUM_FORMANTS)
+	frame_formants.fill(0.0)
+	for i in range(min(NUM_FORMANTS, frame_peaks.size())):
+		frame_formants[i] = frame_peaks[i]["frequency"]
 	return frame_formants
 
+var moving_sum: float = 0.0
+var energy_window: Array = []
+var window_size: int = 50
 func dynamic_threshold(new_frame_energies: Array[float]) -> float:
 	# Calculate the total energy for the new frame
 	var new_sum = 0.0
@@ -200,8 +214,16 @@ func dynamic_threshold(new_frame_energies: Array[float]) -> float:
 	# Return the average as the dynamic threshold, normalized by the number of buckets
 	return moving_sum / (energy_window.size() * NUM_BUCKETS)
 
-
-var moving_sum: float = 0.0
-var energy_window: Array = []
-var window_size: int = 50  # Adjust the window size as needed
-
+#func apply_mel_filters_to_frame(frame: Array) -> Array:
+	#var mel_energy_frame: Array = []
+	#for mel_filter in mel_filter_banks:
+		#var mel_energy: float = 0.0
+		#for i in range(mel_filter.size()):
+			#mel_energy += frame[i] * mel_filter[i]
+		#mel_energy_frame.append(mel_energy)
+	#return mel_energy_frame
+#
+#func calculate_mfccs_from_frame(mel_energy_frame: Array) -> Array:
+	#var log_mel_energies = mel_energy_frame.map(func(energy): return log(max(energy, EPSILON)))
+	#var cepstral_coeffs = dct_ii(log_mel_energies)
+	#return cepstral_coeffs
