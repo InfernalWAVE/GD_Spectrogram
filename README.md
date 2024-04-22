@@ -4,9 +4,9 @@ NOTE: this project is under heavy development at the moment and this description
 
 This is a demo for capturing spectrograms, mel-scale spectrograms, and mel-scale cepstral coefficients (MFCCs), and identifying formants using GDScript.
 
-The demo includes a script for capturing audio over time and generating images on close.
+The demo includes a scene + script for capturing audio over time and generating images on close.
 
-The demo also includes a script for showing a spectrogram in realtime over a short time window.
+The demo also includes a scene + script for showing a spectrogram in realtime over a short time window.
 
 Both demos identify the first 4 formants in the analyzed audio. The formants are drawn in green on the spectrogram image. The realtime demo uses a faster/less-accurate dynamic compression method for this purpose.
 
