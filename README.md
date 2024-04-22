@@ -10,8 +10,10 @@ The demo also includes a script for showing a spectrogram in realtime over a sho
 
 Both demos identify the first 4 formants in the analyzed audio. The formants are drawn in green on the spectrogram image. The realtime demo uses a faster/less-accurate dynamic compression method for this purpose.
 
-The spectrogram images look like:
+Both demos give a realtime visualization of the bucket levels using progress bars.
 
+The spectrogram images look like:
+ 
 ![spectrogram_capture_1](https://github.com/InfernalWAVE/GD_Spectrogram/assets/48569884/8ac480c7-73f1-4418-a8f4-5225a5bd5e9c)
 
 The mel-scale spectrogram images look like:
@@ -28,6 +30,7 @@ the non-relatime demo generates the capture on exit_tree. so that means you have
 
 you may need to adjust the FFT size or NUM_BUCKETS to suit your needs and/or hardware capabilities.
 
+the .gitignore is set to ignore the .tres files in the captures folder bc they can be too large for github depending on the length of the capture.
 
 # CREDITS
 This software contains assets from the Librosa repo (sample sounds for validation). See LICENSE.LIBROSA.md for information on permissions.
