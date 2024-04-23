@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://blyxna5rkxcdg"]
+
+[ext_resource type="Script" path="res://vocoder.gd" id="1_npiq4"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_by1sw"]
+
+[node name="Vocoder" type="AudioStreamPlayer" node_paths=PackedStringArray("refill_buffer_timer")]
+stream = SubResource("AudioStreamGenerator_by1sw")
+autoplay = true
+script = ExtResource("1_npiq4")
+refill_buffer_timer = NodePath("")

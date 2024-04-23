@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bprxskwbkv747"]
+
+[ext_resource type="Script" path="res://scripts/speech_generator_controller.gd" id="1_okvu8"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_by1sw"]
+
+[node name="SpeechGenerator" type="AudioStreamPlayer" node_paths=PackedStringArray("refill_buffer_timer")]
+stream = SubResource("AudioStreamGenerator_by1sw")
+script = ExtResource("1_okvu8")
+refill_buffer_timer = NodePath("RefillBufferTimer")
+
+[node name="RefillBufferTimer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true

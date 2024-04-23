@@ -206,7 +206,7 @@ func apply_mel_filters_to_energies():
 
 		mel_energies.append(mel_energy_frame)
 
-func dct_ii(input_signal: Array) -> Array[float]:
+func dct_ii(input_signal: Array[float]) -> Array[float]:
 	var n: int = input_signal.size()
 	var result: Array[float] = []
 	var c: float = PI / (2.0 * float(n))
