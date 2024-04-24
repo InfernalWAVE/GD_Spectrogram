@@ -1,4 +1,53 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://d2xuweqiy54i"]
+[gd_resource type="AudioBusLayout" load_steps=9 format=3 uid="uid://d2xuweqiy54i"]
+
+[sub_resource type="AudioEffectEQ21" id="AudioEffectEQ21_18kok"]
+resource_name = "EQ21"
+band_db/22_hz = -60.0
+band_db/32_hz = -60.0
+band_db/44_hz = -60.0
+band_db/63_hz = -60.0
+band_db/90_hz = -60.0
+band_db/125_hz = -60.0
+band_db/175_hz = -60.0
+band_db/250_hz = -60.0
+band_db/350_hz = -41.0
+band_db/500_hz = -10.0
+band_db/11000_hz = -60.0
+band_db/16000_hz = -60.0
+band_db/22000_hz = -60.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_yq7hw"]
+resource_name = "Compressor"
+mix = 0.5
+sidechain = &"Record"
+
+[sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_w5l48"]
+resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_qg1wl"]
+resource_name = "Chorus"
+voice_count = 4
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+voice/4/delay_ms = 12.0
+voice/4/rate_hz = 1.0
+voice/4/depth_ms = 0.0
+voice/4/level_db = 0.0
+voice/4/cutoff_hz = 16000.0
+voice/4/pan = 0.0
+
+[sub_resource type="AudioEffectBandLimitFilter" id="AudioEffectBandLimitFilter_tca8g"]
+resource_name = "BandLimitFilter"
+cutoff_hz = 60.0
+resonance = 1.0
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_v4ppr"]
+resource_name = "Amplify"
+volume_db = 20.0
 
 [sub_resource type="AudioEffectRecord" id="AudioEffectRecord_5ys5h"]
 resource_name = "Record"
@@ -8,6 +57,19 @@ resource_name = "SpectrumAnalyzer"
 buffer_length = 4.0
 
 [resource]
+bus/0/volume_db = 0.0672607
+bus/0/effect/0/effect = SubResource("AudioEffectEQ21_18kok")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectCompressor_yq7hw")
+bus/0/effect/1/enabled = true
+bus/0/effect/2/effect = SubResource("AudioEffectStereoEnhance_w5l48")
+bus/0/effect/2/enabled = true
+bus/0/effect/3/effect = SubResource("AudioEffectChorus_qg1wl")
+bus/0/effect/3/enabled = true
+bus/0/effect/4/effect = SubResource("AudioEffectBandLimitFilter_tca8g")
+bus/0/effect/4/enabled = true
+bus/0/effect/5/effect = SubResource("AudioEffectAmplify_v4ppr")
+bus/0/effect/5/enabled = true
 bus/1/name = &"Record"
 bus/1/solo = false
 bus/1/mute = true

@@ -28,7 +28,7 @@ var time_index: int = 0
 
 var realtime_image: Image
 
-const NUM_BUCKETS: int = 256
+const NUM_BUCKETS: int = 1024
 const MAX_FREQ: float = 8000.0
 const MIN_FREQ: float = 180.0
 const MIN_DB: float = 60.0
@@ -37,7 +37,8 @@ const SPECTROGAM_SCALE: int = 8
 const SAMPLE_RATE: int = 44100
 const EPSILON: float = 1e-6
 const NUM_FRAMES: int = 120
-const NUM_FORMANTS: int = 4
+const NUM_FORMANTS: int = 10
+
 
 func _ready() -> void:
 	var empty_powers: Array[Vector2] = []
@@ -104,7 +105,7 @@ func spectrum_analyze_audio() -> void:
 	circular_buffer_index = (circular_buffer_index + 1) % NUM_FRAMES
 	
 func refresh_levels_ui() -> void:
-	for i in range(NUM_FORMANTS):
+	for i in range(4):
 		formant_labels[i].set_text(str(formants[time_index%NUM_FRAMES][i]["amplitude"]) + "\n" + str(formants[time_index%NUM_FRAMES][i]["frequency"]))
 
 func smooth_spectrum(frame: Array[float]) -> Array[float]:
@@ -147,8 +148,8 @@ func get_formants_for_frame(frame: Array, _dynamic_threshold: float) -> Array[Di
 	var frame_formants: Array[Dictionary] = []
 	frame_formants.resize(NUM_FORMANTS)
 	frame_formants.fill({"frequency": 0.0, "amplitude": 0.0,})
-	for i in range(min(NUM_FORMANTS, frame_peaks.size())):
-		frame_formants[i] = frame_peaks[i]
+	for i in range(min(NUM_FORMANTS, frame_peaks.size()-1)):
+		frame_formants[i] = frame_peaks[i+1]
 	return frame_formants
 
 var moving_sum: float = 0.0

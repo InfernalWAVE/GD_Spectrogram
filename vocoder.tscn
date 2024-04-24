@@ -4,8 +4,7 @@
 
 [sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_by1sw"]
 
-[node name="Vocoder" type="AudioStreamPlayer" node_paths=PackedStringArray("refill_buffer_timer")]
+[node name="Vocoder" type="AudioStreamPlayer"]
 stream = SubResource("AudioStreamGenerator_by1sw")
 autoplay = true
 script = ExtResource("1_npiq4")
-refill_buffer_timer = NodePath("")

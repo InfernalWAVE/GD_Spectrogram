@@ -1,10 +1,9 @@
 class_name Vocoder
 extends AudioStreamPlayer
 
-@export var refill_buffer_timer: Timer
 var playback: AudioStreamGeneratorPlayback
 var sample_rate_hz: float = 44100.0
-var amplitude_threshold: float = 0.01  # Threshold for amplitude below which to generate silence
+var amplitude_threshold: float = 0.001  # Threshold for amplitude below which to generate silence
 
 var buffer_index: int = 0
 var cutoff_frequency: float = 300.0  # Low-pass filter cutoff

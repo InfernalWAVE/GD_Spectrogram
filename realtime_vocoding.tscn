@@ -5,7 +5,7 @@
 
 [sub_resource type="ImageTexture" id="ImageTexture_y0xxr"]
 
-[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_5xjdy"]
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_m5tjx"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -87,7 +87,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PhonemeDetect" node_paths=PackedStringArray("levels_container", "vocoder", "F1_label", "F2_label", "F3_label", "F4_label")]
-stream = SubResource("AudioStreamMicrophone_5xjdy")
+stream = SubResource("AudioStreamMicrophone_m5tjx")
 autoplay = true
 bus = &"Record"
 script = ExtResource("2_rifix")
